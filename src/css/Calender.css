@@ -1,0 +1,19 @@
+.calender-Box {
+    display: flex;
+    text-align: center;
+    background-color: #FEFFE6;
+    width: 600px;
+    justify-content: center;
+    border: solid black;
+
+}
+
+div.month {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dates {
+    padding: 12px;
+    margin-bottom: 9px;
+}
