@@ -9,11 +9,45 @@
 }
 
 div.month {
+    display: flex;
+    justify-content: space-between;
     font-weight: bold;
     font-size: 20px;
+    margin-top: 4px;
 }
 
 .dates {
     padding: 12px;
     margin-bottom: 9px;
+}
+
+.buttonsPN {
+    color: black;
+    background-color: #C1AB7E;
+    border: #8B7C5D solid;
+    border-width: 1px;
+}
+
+.buttonsPN:hover,
+.buttonsPN:active {
+    background-color: #7C6F30;
+    border: #5e4b25 solid;
+    border-width: 1px;
+}
+
+.btn-outline-info {
+    --bs-btn-color: black; /* 변경하고자 하는 색상 */
+    --bs-btn-border-color: #8B7C5D; /* 변경하고자 하는 색상 */
+    --bs-btn-hover-color: black; /* 변경하고자 하는 색상 */
+    --bs-btn-hover-bg: #C1AB7E; /* 변경하고자 하는 색상 */
+    --bs-btn-hover-border-color: #8B7C5D; /* 변경하고자 하는 색상 */
+    --bs-btn-focus-shadow-rgb: 13, 202, 240;
+    --bs-btn-active-color: black; /* 변경하고자 하는 색상 */
+    --bs-btn-active-bg: #7C6F30; /* 변경하고자 하는 색상 */
+    --bs-btn-active-border-color: #5e4b25; /* 변경하고자 하는 색상 */
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #8B7C5D; /* 변경하고자 하는 색상 */
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #8B7C5D; /* 변경하고자 하는 색상 */
+    --bs-gradient: none;
 }

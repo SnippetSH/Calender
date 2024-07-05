@@ -2,9 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import './App.css';
 import Calender from './pages/Calender';
-import { Navbar, Container } from 'react-bootstrap';
+import { Navbar, Container, Button, Offcanvas } from 'react-bootstrap';
 import { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useState } from 'react';
+import DownArrow from './img/DownArrow.png';
+import LeftArrow from './img/LeftArrow.png';
+import RightArrow from './img/RightArrow.png';
+import RightArrow2 from './img/RightArrow2.png';
 
 function App() {
   const date = Temporal.Now.plainDateISO();
@@ -14,12 +18,17 @@ function App() {
     let curYear = date.year;
 
     let [month, setMonth] = useState(curMonth);
+    let name = 'ryu';
 
   useEffect(() => {
     if(month > 12) {
       setMonth(1);
     } 
   }, [month])
+
+  const [show, setShow] = useState(false);
+
+  const handleOffcanvas = () => setShow(!show);
 
   return (
     <div className="App">
@@ -34,20 +43,30 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className='flex-box'>
-        <div className='center'>
-          <Calender month={month}></Calender>
-        </div>
-        <div className='button-box'>
-          <button className='buttons' onClick={() => {
-            setMonth(month++);
-          }}>증가</button>
-          <button className='buttons' onClick={() => {
-            setMonth(month--);
-          }}>감소</button>
+      <Button variant="primary" onClick={handleOffcanvas} className={`offcanvas-btn ${show ? 'shifted' : ''}`}>
+        {show ? 
+          <img src={LeftArrow} alt='>' width={'12px'}/> : 
+          <img src={RightArrow} alt='>' width={'12px'}/>
+        }
+      </Button>
+      <div className={`app-container ${show ? 'shifted' : ''}`}>
+
+        <Offcanvas show={show} onHide={handleOffcanvas} placement="start" scroll={true} backdrop={false}>
+          <Offcanvas.Header closeButton className='Sidebar-header'>
+            <Offcanvas.Title className='Sidebar-title'>Teleport</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            추가 예정..
+          </Offcanvas.Body>
+        </Offcanvas>
+
+        <div className='flex-box'>
+          <div className='center'>
+            <Calender></Calender>
+          </div>
         </div>
       </div>
-      {/* <Dates></Dates> */}
+
     </div>
   );
 }

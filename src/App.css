@@ -40,3 +40,69 @@ button.buttons {
   display: flex;
   flex-direction: column;
 }
+
+.app-container {
+  margin: 0;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.app-container.shifted {
+  transform: translateX(200px); /* Offcanvas 창의 너비에 맞게 조정 */
+}
+
+.offcanvas-btn {
+  position: absolute;
+  left: 0.4px;;
+  top: 7%;
+  transition: transform 0.3s ease-in-out;
+  background: rgb(222, 255, 102);
+  background: linear-gradient(0deg, rgb(249, 255, 218) 0%, rgb(255, 248, 183) 100%);
+  border: none;
+  color: black;
+  font-weight: bold;
+  z-index: 2000;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.offcanvas-btn:before {
+  height: 0%;
+  width: 2px;
+}
+
+.offcanvas-btn:hover {
+  color: black;
+  box-shadow:  2.5px 2.5px 4px 0 rgba(255,255,255,.5),
+              -2.5px -2.5px 4px 0 rgba(116, 125, 136, .5), 
+    inset -2.5px -2.5px 4px 0 rgba(255,255,255,.2),
+    inset 2.5px 2.5px 4px 0 rgba(0, 0, 0, .4);
+}
+
+.offcanvas-btn:active {
+  color: black;
+}
+
+.offcanvas-btn.shifted {
+  transform: translateX(400px);
+}
+
+.btn-primary {
+  --bs-btn-color: black;
+  --bs-btn-hover-color: black;
+  --bs-btn-active-color: black;
+  --bs-btn-disabled-color: black;
+}
+
+.Sidebar-header {
+  display: flex;
+  justify-content: center;
+  padding-top: 21px;
+}
+
+.btn-close {
+  margin-left: 220px !important;
+}

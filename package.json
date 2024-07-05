@@ -2,7 +2,7 @@
   "name": "calender_cal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://snippetsh.github.io/Calender/build",
+  "homepage": "https://snippetsh.github.io/Calender/",
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4",
     "@reduxjs/toolkit": "^2.2.6",

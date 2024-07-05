@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 
-function dates(month) {
+function dates(month, year) {
     let week = {
         1 : 'Mon',
         2 : 'Tue',
@@ -17,13 +17,13 @@ function dates(month) {
     let curYear = date.year;
 
     /** 현재 년도, 현재 달, 1일 */
-    const firstDayofMonth = Temporal.PlainDate.from({year : curYear, month : month, day : 1}); 
+    const firstDayofMonth = Temporal.PlainDate.from({year : year, month : month, day : 1}); 
     /** 현재 달에 몇 일까지 있는지 */
     const daysInMonth = firstDayofMonth.daysInMonth;
     /** 현재 달의 1일이 무슨 요일인지 */
-    const startDayofWeek = new Date(curYear, month-1, 1).getDay();
+    const startDayofWeek = new Date(year, month-1, 1).getDay();
 
-    return {FDpM : firstDayofMonth, DiM : daysInMonth, SDoW : startDayofWeek};
+    return {DiM : daysInMonth, SDoW : startDayofWeek};
 }
 
 
