@@ -1,10 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, useNavigate, Outlet } from 'react-router-dom';
-import './App.css';
-import Calender from './pages/Calender';
 import { Navbar, Container, Button, Offcanvas } from 'react-bootstrap';
 import { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useState } from 'react';
+
+import Calender from './pages/Calender';
+import TeleportBody from './pages/TeleportBody';
+
+import './css/App.css';
 import DownArrow from './img/DownArrow.png';
 import LeftArrow from './img/LeftArrow.png';
 import RightArrow from './img/RightArrow.png';
@@ -52,12 +55,12 @@ function App() {
       <div className={`app-container ${show ? 'shifted' : ''}`}>
 
         <Offcanvas show={show} onHide={handleOffcanvas} placement="start" scroll={true} backdrop={false}>
-          <Offcanvas.Header closeButton className='Sidebar-header'>
-            <Offcanvas.Title className='Sidebar-title'>Teleport</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            추가 예정..
-          </Offcanvas.Body>
+            <Offcanvas.Header closeButton className='Sidebar-header'>
+                <Offcanvas.Title className='Sidebar-title'>Teleport</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+                <TeleportBody/>
+            </Offcanvas.Body>
         </Offcanvas>
 
         <div className='flex-box'>

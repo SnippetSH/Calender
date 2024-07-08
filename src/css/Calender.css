@@ -5,7 +5,8 @@
     width: 600px;
     justify-content: center;
     border: solid black;
-
+    height: 470px;
+    overflow: hidden;
 }
 
 div.month {
@@ -16,9 +17,28 @@ div.month {
     margin-top: 4px;
 }
 
-.dates {
-    padding: 12px;
-    margin-bottom: 9px;
+.calendar-container {
+    display: flex;
+    position: relative; /* 세 개의 달력을 포함할 수 있는 너비 설정 */
+}
+
+.prev {
+    transition: transform 0.5s ease;
+    transform: translateX(0);
+}
+
+.next {
+    transition: transform 0.5s ease;
+    transform: translateX(-1133.56px);
+}
+
+.origin {
+    transform: translateX(-566.78px);
+}
+
+.calendar {
+    width: 566.78px;
+    flex-shrink: 0;
 }
 
 .buttonsPN {

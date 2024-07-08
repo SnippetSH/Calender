@@ -1,13 +1,28 @@
-import { Col, Container, Row, Stack, Button } from 'react-bootstrap';
+import { Container, Stack, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import { Temporal } from "@js-temporal/polyfill";
 import '../css/Calender.css';
 import dates from '../data_state/dates';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Dates from './Dates.tsx';
+import { OverlayChildren, OverlayProps } from '../../node_modules/react-bootstrap/esm/Overlay';
 
 type datesType = {
-    DiM: number;
-    SDoW: number;
+    prev : {
+        DiM: number;
+        SDoW: number;
+    },
+    cur : {
+        DiM: number;
+        SDoW: number;
+        CD: number;
+    },
+    next : {
+        DiM: number;
+        SDoW: number;
+    }
 }
+
+export type { datesType };
 
 function Calender(): JSX.Element {
 
@@ -19,112 +34,79 @@ function Calender(): JSX.Element {
 
     let [datesObj, setDatesObj] = useState(dates(curMonth, curYear));
 
+    const [direction, setDirection] = useState(''); // 애니메이션 방향 상태
+
+
     useEffect(() => {
-        if (month > 12) {
-            setMonth(1);
-            setYear(year+1);
-        } else if (month < 1) {
-            setMonth(12);
-            setYear(year-1);
-        }
         setDatesObj(dates(month, year));
-    }, [month]);
+    }, [month, year]);
+
+    const handle = (isPrev : boolean) => {
+        setDirection(isPrev ? 'prev' : 'next'); // 애니메이션 방향 설정
+
+        setTimeout(() => {
+            setMonth(prevMonth => {
+                if (prevMonth === 1 && isPrev) {
+                    setYear(year - 1);
+                    return 12;
+                } else if (prevMonth === 12 && !isPrev) {
+                    setYear(year + 1);
+                    return 1;
+                } else {
+                    return isPrev ? prevMonth - 1 : prevMonth + 1;
+                }
+            });
+
+            setDirection('');
+        }, 500); // 애니메이션 지속 시간만큼 지연
+    };
+
+    const renderPrev = (props: any) : React.ReactNode => (
+        <Tooltip id='prev-tooltip' {... props}>
+            move to prev month
+        </Tooltip>
+    )
+
+    const renderNext = (props: any) : React.ReactNode => (
+        <Tooltip id='next=tooltip' {... props}>
+            move to next month
+        </Tooltip>
+    )
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    
     return (
         <div className='calender-Box'>
             <Container>
                 <Stack gap={2}>
                     <div className='month'>
-                        <Button variant="outline-info" className='buttonsPN' onClick={() => {
-                            setMonth(month - 1);
-                        }}>prev</Button>{' '}
+                        <OverlayTrigger
+                            placement='right'
+                            delay={{show: 250, hide: 400}}
+                            overlay={renderPrev}>
+                            <Button variant="outline-info" className='buttonsPN' onClick={()=>handle(true)}>prev</Button>
+                        </OverlayTrigger>
                         <div>{year} {months[month - 1]}</div>
-                        <Button variant="outline-info" className='buttonsPN' onClick={() => {
-                            setMonth(month + 1);
-                        }}>next</Button>{' '}
+                        <OverlayTrigger
+                            placement='right'
+                            delay={{show: 250, hide: 400}}
+                            overlay={renderNext}>
+                            <Button variant="outline-info" className='buttonsPN' onClick={()=>handle(false)}>next</Button>
+                        </OverlayTrigger>
                     </div>
-                    <div>
-                        <Dates datesObj={datesObj}></Dates>
+                    <div className={`calendar-container ${direction === 'prev' ? 'prev' : direction === 'next' ? 'next' : 'origin'}`}>
+                        <div className="calendar">
+                            <Dates datesObj={datesObj} curMonth={curMonth} curYear={curYear} month={month - 1 || 12} year={month === 1 ? year - 1 : year} ch={0} mini={false}></Dates>
+                        </div>
+                        <div className="calendar">
+                            <Dates datesObj={datesObj} curMonth={curMonth} curYear={curYear} month={month} year={year} ch={1} mini={false}></Dates>
+                        </div>
+                        <div className="calendar">
+                            <Dates datesObj={datesObj} curMonth={curMonth} curYear={curYear} month={month + 1 > 12 ? 1 : month + 1} year={month === 12 ? year + 1 : year} ch={2} mini={false}></Dates>
+                        </div>
                     </div>
                 </Stack>
             </Container>
-        </div>
-    )
-}
-
-function Dates({ datesObj }: { datesObj: datesType }) {
-    console.log(datesObj);
-    let curDate = 1;
-
-    useEffect(() => {
-        curDate = 1;
-    }, [datesObj])
-
-    const renderFirstWeek = (): JSX.Element[] => {
-        const cols: JSX.Element[] = [];
-        let date = 1;
-
-        for (let i = 0; i < datesObj.SDoW; i++) {
-            cols.push(<Col key={`empty-${i}`} className='dates'>{null}</Col>);
-        }
-
-        for (let i = datesObj.SDoW; i < 7; i++) {
-            cols.push(<Col key={`date-${date}`} className='dates'>{date++}</Col>);
-        }
-
-        curDate = date;
-        console.log(curDate);
-        return cols;
-    }
-
-    const renderRemain = (): JSX.Element[] => {
-        console.log(curDate);
-        let date = curDate;
-        console.log(date);
-        const rows: JSX.Element[] = [];
-        let cols: JSX.Element[] = [];
-        let i = 0;
-
-        while (date <= datesObj.DiM) {
-            if (i === 7) {
-                i = 0;
-                let tmp = <Row key={`row-${date}`}>{cols}</Row>;
-                rows.push(tmp);
-                cols = [];
-            }
-            cols.push(<Col key={`date-${date}`} className='dates'>{date++}</Col>);
-            i++;
-        }
-
-        let len = cols.length;
-
-        for (let i = len; i < 7; i++) {
-            cols.push(<Col key={`empty-${date + i}`} className='dates'>{null}</Col>);
-        }
-        rows.push(<Row key={`row-last`}>{cols}</Row>);
-
-        console.log(rows);
-        return rows;
-    }
-
-    return (
-        <div>
-            <Stack gap={2}>
-                <Row>
-                    <Col className='dates-top'>Sun</Col>
-                    <Col className='dates-top'>Mon</Col>
-                    <Col className='dates-top'>Tue</Col>
-                    <Col className='dates-top'>Wed</Col>
-                    <Col className='dates-top'>Thu</Col>
-                    <Col className='dates-top'>Fri</Col>
-                    <Col className='dates-top'>Sat</Col>
-                </Row>
-                <Row>
-                    {renderFirstWeek()}
-                </Row>
-                {renderRemain()}
-            </Stack>
         </div>
     )
 }
