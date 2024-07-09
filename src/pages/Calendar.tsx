@@ -1,41 +1,20 @@
 import { Container, Stack, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
-import { Temporal } from "@js-temporal/polyfill";
 import '../css/Calender.css';
-import dates from '../data_state/dates';
+import dates from '../data_state/dates.js';
 import React, { useEffect, useState } from 'react';
 import Dates from './Dates.tsx';
-import { OverlayChildren, OverlayProps } from '../../node_modules/react-bootstrap/esm/Overlay';
+import { renderDateState } from '../type/type.ts';
+import { useAppSelector } from '../data_state/hooks/index.ts';
+import { selectRenderDate } from '../data_state/datesInform.ts';
 
-type datesType = {
-    prev : {
-        DiM: number;
-        SDoW: number;
-    },
-    cur : {
-        DiM: number;
-        SDoW: number;
-        CD: number;
-    },
-    next : {
-        DiM: number;
-        SDoW: number;
-    }
-}
-
-export type { datesType };
-
-function Calender(): JSX.Element {
-
-    const date = Temporal.Now.plainDateISO();
-    let curMonth = date.month;
-    let curYear = date.year;
-    let [month, setMonth] = useState(curMonth);
-    let [year, setYear] = useState(curYear);
-
-    let [datesObj, setDatesObj] = useState(dates(curMonth, curYear));
-
+function Calender({ curMonth, curYear } : {curMonth: number, curYear: number}): JSX.Element {
     const [direction, setDirection] = useState(''); // 애니메이션 방향 상태
 
+    const renderDate = useAppSelector(selectRenderDate);
+    console.log(renderDate);
+    let [datesObj, setDatesObj] = useState(dates(renderDate.month, renderDate.year));
+    let [month, setMonth] = useState(renderDate.month);
+    let [year, setYear] = useState(renderDate.year);
 
     useEffect(() => {
         setDatesObj(dates(month, year));
@@ -86,7 +65,7 @@ function Calender(): JSX.Element {
                             overlay={renderPrev}>
                             <Button variant="outline-info" className='buttonsPN' onClick={()=>handle(true)}>prev</Button>
                         </OverlayTrigger>
-                        <div>{year} {months[month - 1]}</div>
+                        <div className='year-month'>{year} {months[month - 1]}</div>
                         <OverlayTrigger
                             placement='right'
                             delay={{show: 250, hide: 400}}

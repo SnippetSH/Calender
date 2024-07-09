@@ -1,3 +1,34 @@
+@font-face {
+  font-family: 'Modellista';
+  src: url('./Modellista.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Aromatic-Dream';
+  src: url('./AromaticDream.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Vel';
+  src: url('./Velourist.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Aesthe';
+  src: url('./AestheticMonoline.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Direction';
+  src: url('./Direction.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Rading';
+  src: url('./RadingRegular.ttf') format('truetype');
+}
+
+
 html, body {
   height: 100%;
   margin: 0;

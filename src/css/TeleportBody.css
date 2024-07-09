@@ -1,17 +1,18 @@
-.mini-calender {
+.mini-calendar {
     background-color: #FEFFE6;
     border: solid grey;
     border-width: 1px;
-    height: 170px;
-    width: 108px;
+    width: 45%;
+    height: 197px;
+    margin-bottom: 12px !important;
 }
 
 .mini-p {
+    font-family: 'Vel';
     width: 100%;
-    color: #1900fd;
-    font-size: 10px;
+    color: #201b50;
+    font-size: 18px;
+    /* font-weight: bold; */
     text-align: center;
     margin-bottom: 1px;
-    border: solid black;
-    border-width: 1px;
 }

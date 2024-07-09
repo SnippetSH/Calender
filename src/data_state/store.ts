@@ -1,8 +1,10 @@
-import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { renderDate } from "./datesInform";
+
 
 const store = configureStore({
     reducer : {
-
+        renderDate: renderDate.reducer,
     }
 })
 

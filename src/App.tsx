@@ -3,35 +3,46 @@ import { Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import { Navbar, Container, Button, Offcanvas } from 'react-bootstrap';
 import { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from './data_state/hooks';
+import { selectRenderDate, setDate } from './data_state/datesInform';
 
-import Calender from './pages/Calender';
+import Calender from './pages/Calendar';
 import TeleportBody from './pages/TeleportBody';
 
 import './css/App.css';
-import DownArrow from './img/DownArrow.png';
 import LeftArrow from './img/LeftArrow.png';
 import RightArrow from './img/RightArrow.png';
-import RightArrow2 from './img/RightArrow2.png';
 
 function App() {
   const date = Temporal.Now.plainDateISO();
-    console.log(date);
 
     let curMonth = date.month;
     let curYear = date.year;
 
-    let [month, setMonth] = useState(curMonth);
-    let name = 'ryu';
-
-  useEffect(() => {
-    if(month > 12) {
-      setMonth(1);
-    } 
-  }, [month])
+    const renderDate = useAppSelector(selectRenderDate);
+    const dispatch = useAppDispatch();
 
   const [show, setShow] = useState(false);
-
   const handleOffcanvas = () => setShow(!show);
+
+  dispatch(setDate({month: curMonth, year: curYear}));
+
+  let [clicked, setClicked] = useState({month: renderDate.month, year: renderDate.year});
+
+  useEffect(() => {
+    console.log(clicked);
+    setTimeout(() => {
+      dispatch(setDate({month: clicked.month, year: clicked.year}));
+    }, 0);
+  }, [clicked]);
+
+  const renderNewCal = (month: number, year: number) : void => {
+    handleOffcanvas();
+    setTimeout(() => {
+      setClicked({month: month, year: year});
+      console.log(clicked);
+    }, 0);
+  }
 
   return (
     <div className="App">
@@ -59,13 +70,13 @@ function App() {
                 <Offcanvas.Title className='Sidebar-title'>Teleport</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                <TeleportBody/>
+                <TeleportBody renderNewDate={renderNewCal}/>
             </Offcanvas.Body>
         </Offcanvas>
 
         <div className='flex-box'>
           <div className='center'>
-            <Calender></Calender>
+            <Calender curMonth={curMonth} curYear={curYear}></Calender>
           </div>
         </div>
       </div>

@@ -11,7 +11,6 @@ function dates(month, year) {
         7 : 'Sun'
     }
     const date = Temporal.Now.plainDateISO();
-    console.log(date);
 
     let curMonth = date.month;
     let curYear = date.year;

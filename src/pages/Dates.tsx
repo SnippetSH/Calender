@@ -1,10 +1,9 @@
 import { Row, Col, Stack } from "react-bootstrap";
 import { useEffect } from "react";
-import type { datesType } from "./Calender";
+import type { datesType } from '../type/type.ts'
 import '../css/Dates.css'
 
 function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesObj: datesType, curMonth: number, curYear: number, month: number, year: number, ch: number, mini: boolean }) {
-    console.log(datesObj);
     let curDate = 1;
     let prevDate = 1;
     let nextDate = 1;
@@ -25,22 +24,21 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
 
         for (let i = datesObj.cur.SDoW; i < 7; i++) {
             if(date === datesObj.cur.CD && curMonth === month && curYear === year) {
-                cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}><div className={`${mini ? 'mini-current' : 'current'}`}>{date++}</div></Col>);
+                cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}><div className={`${mini ? 'mini-current' : 'current'}`}>{date++}</div></Col>);
                 continue;
             }
-            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{date++}</Col>);
+            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{date++}</Col>);
         }
 
         curDate = date;
-        console.log(curDate);
+        
         return cols;
     }
 
     const renderRemain = (): JSX.Element[] => {
-        console.log(curDate);
+        
         let date = curDate;
-        console.log(date);
-        const rows: JSX.Element[] = [];
+              const rows: JSX.Element[] = [];
         let cols: JSX.Element[] = [];
         let i = 0;
 
@@ -52,11 +50,11 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
                 cols = [];
             }
             if(date === datesObj.cur.CD && curMonth === month && curYear === year) {
-                cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}><div className={`${mini ? 'mini-current' : 'current'}`}>{date++}</div></Col>);
+                cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}><div className={`${mini ? 'mini-current' : 'current'}`}>{date++}</div></Col>);
                 i++;
                 continue;
             }
-            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{date++}</Col>);
+            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{date++}</Col>);
             i++;
         }
 
@@ -66,8 +64,7 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
             cols.push(<Col key={`empty-${date + i}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{null}</Col>);
         }
         rows.push(<Row key={`row-last`}>{cols}</Row>);
-        console.log(rows);
-        return rows;
+              return rows;
     }
 
 
@@ -81,7 +78,7 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
         }
 
         for (let i = datesObj.prev.SDoW; i < 7; i++) {
-            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{date++}</Col>);
+            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{date++}</Col>);
         }
 
         prevDate = date;
@@ -103,14 +100,14 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
                 rows.push(tmp);
                 cols = [];
             }
-            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{date++}</Col>);
+            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{date++}</Col>);
             i++;
         }
 
         let len = cols.length;
 
         for (let i = len; i < 7; i++) {
-            cols.push(<Col key={`empty-${date + i}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{null}</Col>);
+            cols.push(<Col key={`empty-${date + i}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{null}</Col>);
         }
         rows.push(<Row key={`row-last`}>{cols}</Row>);
 
@@ -122,11 +119,11 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
         let date = 1;
 
         for (let i = 0; i < datesObj.next.SDoW; i++) {
-            cols.push(<Col key={`empty-${i}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{null}</Col>);
+            cols.push(<Col key={`empty-${i}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{null}</Col>);
         }
 
         for (let i = datesObj.next.SDoW; i < 7; i++) {
-            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{date++}</Col>);
+            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{date++}</Col>);
         }
 
         nextDate = date;
@@ -147,14 +144,14 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
                 rows.push(tmp);
                 cols = [];
             }
-            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{date++}</Col>);
+            cols.push(<Col key={`date-${date}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{date++}</Col>);
             i++;
         }
 
         let len = cols.length;
 
         for (let i = len; i < 7; i++) {
-            cols.push(<Col key={`empty-${date + i}`} className={`${mini ? 'dates-mini' : 'dates'}`}>{null}</Col>);
+            cols.push(<Col key={`empty-${date + i}`} className={`${mini ? 'dates-mini' : 'dates'} ${i === 6 ? 'text-blue-600' : ''} ${i === 0 ? 'text-red-500' : ''}`}>{null}</Col>);
         }
         rows.push(<Row key={`row-last`}>{cols}</Row>);
         return rows;
@@ -164,13 +161,13 @@ function Dates({ datesObj, curMonth, curYear, month, year, ch, mini }: { datesOb
         <div>
             <Stack gap={2}>
                 <Row>
-                    <Col className={`${mini ? 'mini-top' : 'dates-top'}`}>{mini ? 'Su' : 'Sun'}</Col>
+                    <Col className={`${mini ? 'mini-top' : 'dates-top'} text-red-500`}>{mini ? 'Su' : 'Sun'}</Col>
                     <Col className={`${mini ? 'mini-top' : 'dates-top'}`}>{mini ? 'Mo' : 'Mon'}</Col>
                     <Col className={`${mini ? 'mini-top' : 'dates-top'}`}>{mini ? 'Tu' : 'Tue'}</Col>
                     <Col className={`${mini ? 'mini-top' : 'dates-top'}`}>{mini ? 'We' : 'Wed'}</Col>
                     <Col className={`${mini ? 'mini-top' : 'dates-top'}`}>{mini ? 'Th' : 'Thu'}</Col>
                     <Col className={`${mini ? 'mini-top' : 'dates-top'}`}>{mini ? 'Fr' : 'Fri'}</Col>
-                    <Col className={`${mini ? 'mini-top' : 'dates-top'}`}>{mini ? 'Sa' : 'Sat'}</Col>
+                    <Col className={`${mini ? 'mini-top' : 'dates-top'} text-blue-600`}>{mini ? 'Sa' : 'Sat'}</Col>
                 </Row>
                 <Row>
                     {

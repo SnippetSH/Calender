@@ -41,6 +41,12 @@ div.month {
     flex-shrink: 0;
 }
 
+.year-month {
+    font-family: 'Rading';
+    font-weight: bold;
+    font-size: 25px;
+}
+
 .buttonsPN {
     color: black;
     background-color: #C1AB7E;
