@@ -1,15 +1,21 @@
 {
   "files": {
-    "main.css": "/Calender/static/css/main.c4d105aa.css",
-    "main.js": "/Calender/static/js/main.cc7cbe02.js",
+    "main.css": "/Calender/static/css/main.cf3bc1ae.css",
+    "main.js": "/Calender/static/js/main.d4ce626b.js",
     "static/js/453.b7f7d220.chunk.js": "/Calender/static/js/453.b7f7d220.chunk.js",
+    "static/media/AestheticMonoline.ttf": "/Calender/static/media/AestheticMonoline.bada034e266eceb07b83.ttf",
+    "static/media/Direction.otf": "/Calender/static/media/Direction.0bcc1f5b4bc08183aa33.otf",
+    "static/media/Modellista.ttf": "/Calender/static/media/Modellista.a3d13c9950a47ecf374b.ttf",
+    "static/media/Velourist.ttf": "/Calender/static/media/Velourist.89d36eee00dc80cb78f6.ttf",
+    "static/media/RadingRegular.ttf": "/Calender/static/media/RadingRegular.1aa91ab48b893ba36b4d.ttf",
+    "static/media/AromaticDream.otf": "/Calender/static/media/AromaticDream.6a8d2507daebf15712df.otf",
     "index.html": "/Calender/index.html",
-    "main.c4d105aa.css.map": "/Calender/static/css/main.c4d105aa.css.map",
-    "main.cc7cbe02.js.map": "/Calender/static/js/main.cc7cbe02.js.map",
+    "main.cf3bc1ae.css.map": "/Calender/static/css/main.cf3bc1ae.css.map",
+    "main.d4ce626b.js.map": "/Calender/static/js/main.d4ce626b.js.map",
     "453.b7f7d220.chunk.js.map": "/Calender/static/js/453.b7f7d220.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4d105aa.css",
-    "static/js/main.cc7cbe02.js"
+    "static/css/main.cf3bc1ae.css",
+    "static/js/main.d4ce626b.js"
   ]
 }
